@@ -39,6 +39,10 @@ body
     align-items: flex-end;
     background-color: #333533;
     justify-content: space-between;
+    padding: 20px;
+    word-wrap: break-word;
+    word-break: break-all;
+    box-shadow: 0px 4px 25px -10px rgba(0,0,0,0.75);
 }
 .wyczysc
 {
@@ -64,5 +68,8 @@ button:hover
 {
     opacity: 0.5;
 }
+.aktualne_dzialanie {
+    font-size: 30px;
+  }
 
 
