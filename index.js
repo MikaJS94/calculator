@@ -2,7 +2,9 @@ const aktualne_dzialanie = document.querySelector(".aktualne_dzialanie");
 const liczba = document.querySelectorAll(".liczba");
 const operatory = document.querySelectorAll(".operator");
 const usun = document.querySelector(".usun");
+const wyczysc = document.querySelector(".wyczysc");
 const poprzednie_dzialanie = document.querySelector(".poprzednie_dzialanie");
+const rownosc= document.querySelector(".rownosc");
 let liczby = "";
 let operator = undefined;
 let akt_liczba = "";
@@ -12,46 +14,19 @@ let akt;
 let akt_operator;
 
 
-// function wypisz (wpisz)
-// {
-   
-//    if(wpisz == ".")
-//    {
-//    if(!(a.includes(wpisz)))
-//    {
-//       a = a.toString() + wpisz.toString() ;
-//    }
-//    }
-//    else a = a.toString() + wpisz.toString() ;
-   
-//    dzialanie.innerText = a;
-   
-   
-//    console.log(a);
-//    console.log(b);
-   
- 
-// }
-
-// function popdzial (wpisz)
-//    {
-//       b = b.toString()+a;
-//       a="";
-//       b = b.toString() + wpisz.toString() ;
-      
-//       poprzednie.innerText = b;
-      
-//       dzialanie.innerText = "";
-      
-//    }
 
 
 liczba.forEach((element)=> {element.addEventListener("click",()=> 
 {
-   liczby = element.innerText;
-   akt_liczba = akt_liczba + liczby;
-   aktualne_dzialanie.innerText = akt_liczba;
+
    
+   if(element.innerText === '.' && akt_liczba.includes('.'))
+      {
+            return     
+      }
+      liczby = element.innerText;
+      akt_liczba = akt_liczba + liczby;
+      aktualne_dzialanie.innerText = akt_liczba;
    
 }
 )});
@@ -86,22 +61,36 @@ function oblicz()
    akt_liczba = pop.toString();
    
    console.log("dupa");
-   
+   operator = undefined;
 
 }
 
-//usun.addEventListener("click",()=> {dzialanie.innerText = ""; a="";poprzednie.innerText = ""});
+wyczysc.addEventListener("click",()=> {poprzednie_dzialanie.innerText = ""; akt_liczba=""; pop_liczba="";aktualne_dzialanie.innerText = ""; operator=undefined; });
+usun.addEventListener("click",()=>{akt_liczba = akt_liczba.slice(0,-1);  aktualne_dzialanie.innerText = akt_liczba;});
+rownosc.addEventListener("click",()=> {
+   oblicz();
+   akt_liczba = pop.toString();
+   aktualne_dzialanie.innerText = akt_liczba;
+   pop_liczba = undefined;
+   poprzednie_dzialanie.innerText = "";
+   console.log(pop);
+
+});
 
 function aktulizuj(operator)
 {
-   poprzednie_dzialanie.innerText = akt_liczba.toString()+ operator;
-   
+      if(akt_liczba != "")
+      {
 
-
-      pop_liczba = akt_liczba.toString();
-      akt_liczba = "";
-      aktualne_dzialanie.innerText = "";
-      akt_liczba = "";
+         poprzednie_dzialanie.innerText = akt_liczba.toString()+ operator;
+         pop_liczba = akt_liczba.toString();
+         akt_liczba = "";
+         aktualne_dzialanie.innerText = "";
+         akt_liczba = "";
+      }
+      else {
+         poprzednie_dzialanie.innerText = pop_liczba.toString()+ operator;
+      }
 }
 function wybierzOperacje (operacja)
 {
