@@ -5,6 +5,7 @@ const usun = document.querySelector(".usun");
 const wyczysc = document.querySelector(".wyczysc");
 const poprzednie_dzialanie = document.querySelector(".poprzednie_dzialanie");
 const rownosc= document.querySelector(".rownosc");
+const special = document.querySelectorAll(".special");
 let liczby = "";
 let operator = undefined;
 let akt_liczba = "";
@@ -109,4 +110,34 @@ operatory.forEach((element)=>{
       
    }
 )});
+
+special.forEach((element)=>{
+   element.addEventListener("click",()=>
+   {
+      const spec_operator = element.innerText;
+      if(aktualne_dzialanie.innerText !="" ){
+      
+      switch(spec_operator)
+      {
+         case "√":
+         poprzednie_dzialanie.innerText = poprzednie_dzialanie.innerText + `√${aktualne_dzialanie.innerText}`;
+         akt_liczba = Math.sqrt(parseFloat(akt_liczba)).toString();
+         break;
+         case "^":
+            poprzednie_dzialanie.innerText = poprzednie_dzialanie.innerText + `sqrt(${aktualne_dzialanie.innerText})`;
+            akt_liczba = Math.pow(parseFloat(akt_liczba),2).toString();
+            break;
+
+
+      }
+      aktualne_dzialanie.innerText = "";
+      }
+        
+   }
    
+   
+   )
+
+});
+
+
