@@ -40,6 +40,8 @@ function oblicz()
    console.log(operator);
    console.log(pop);
    console.log(akt);
+    
+
    if(isNaN(pop) || isNaN(akt)) {
       return
     }
@@ -70,7 +72,8 @@ wyczysc.addEventListener("click",()=> {poprzednie_dzialanie.innerText = ""; akt_
 usun.addEventListener("click",()=>{akt_liczba = akt_liczba.slice(0,-1);  aktualne_dzialanie.innerText = akt_liczba;});
 rownosc.addEventListener("click",()=> {
    oblicz();
-   akt_liczba = pop.toString();
+
+   //akt_liczba = pop.toString();
    aktualne_dzialanie.innerText = akt_liczba;
    pop_liczba = undefined;
    poprzednie_dzialanie.innerText = "";
@@ -104,7 +107,10 @@ operatory.forEach((element)=>{
    element.addEventListener("click",()=>
    {  
       
-      
+      if(poprzednie_dzialanie.innerText === "" & aktualne_dzialanie.innerText==="" )
+      {
+         return
+      }
       wybierzOperacje(element.innerText);  
       aktulizuj(element.innerText);   
       
@@ -120,13 +126,21 @@ special.forEach((element)=>{
       switch(spec_operator)
       {
          case "√":
-         poprzednie_dzialanie.innerText = poprzednie_dzialanie.innerText + `√${aktualne_dzialanie.innerText}`;
-         akt_liczba = Math.sqrt(parseFloat(akt_liczba)).toString();
+            poprzednie_dzialanie.innerText = poprzednie_dzialanie.innerText + `√${aktualne_dzialanie.innerText}`;
+            akt_liczba = Math.sqrt(parseFloat(akt_liczba)).toString();
          break;
          case "^":
             poprzednie_dzialanie.innerText = poprzednie_dzialanie.innerText + `sqrt(${aktualne_dzialanie.innerText})`;
             akt_liczba = Math.pow(parseFloat(akt_liczba),2).toString();
-            break;
+         break;
+         case "log":
+            poprzednie_dzialanie.innerText = poprzednie_dzialanie.innerText + `log(${aktualne_dzialanie.innerText})`;
+            akt_liczba = Math.log10(parseFloat(akt_liczba)).toString();
+         break;
+         case "%":
+            poprzednie_dzialanie.innerText = poprzednie_dzialanie.innerText + `${aktualne_dzialanie.innerText}%`;
+            akt_liczba = (parseFloat(akt_liczba)*0.01).toString();
+         break;
 
 
       }
